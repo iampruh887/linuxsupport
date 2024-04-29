@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Boxes</title>
+    <style>
+        /* Centering the main container */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide overflowing content */
+            background-color: #000; /* Set black background */
+        }
+
+        /* Styling for the main container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* Ensure proper z-index stacking */
+        }
+        
+        /* Styling for the blue boxes container */
+        .blue-boxes-container {
+            display: flex;
+            flex-direction: column; /* Stack boxes vertically */
+            margin-right: 99px; /* Adjusted gap between blue boxes and green box */
+            align-items: center; /* Center the blue boxes horizontally */
+            z-index: 1; /* Ensure boxes appear above background */
+        }
+        
+        .box {
+            width: 300px; /* Width of upper blue box */
+            height: 300px; /* Height of upper blue box */
+            background-color: #3498db;
+            margin-bottom: 20px; /* Added margin-bottom for gap between blue boxes */
+            position: relative; /* Position relative for absolute positioning of upload box */
+            overflow: hidden; /* Hide overflowing content */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .big-box {
+            width: 480px; /* Width of green box */
+            height: 720px; /* Height of green box */
+            background-color: #2ecc71;
+        }
+
+        .upload-container {
+            position: absolute;
+            top: 50%;
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center vertically and horizontally */
+            width: 80%;
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px;
+            box-sizing: border-box;
+            border: 2px solid transparent; /* Add transparent border */
+            box-shadow: 0 0 10px rgba(255, 235, 59, 0.6); /* Add glowy box shadow */
+            backdrop-filter: blur(10px); /* Add backdrop filter */
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: transparent;
+            border: none;
+            outline: none; /* Remove default focus outline */
+        }
+
+        .text-box {
+            position: absolute;
+            top: 30%; /* Shifted down */
+            left: 10%;
+            width: 80%;
+            height: 50%; /* Reduced height */
+            border: none;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+            color: #fff;
+            resize: none;
+            outline: none;
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background-color: rgba(0, 0, 0, 0.8); /* Dark green background with 80% transparency */
+        }
+
+        .heading {
+            position: absolute;
+            top: 10px;
+            left: 10%;
+            width: 80%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: #ff0000; /* Pure black with a tint of red */
+            background-color: #000000; /* Black background */
+            background-image: linear-gradient(45deg, red, black); /* Linear gradient */
+            -webkit-background-clip: text; /* Apply gradient as text color */
+            color: transparent; /* Hide actual text */
+            transition: all 0.3s ease; /* Shortened transition time */
+        }
+
+        .heading.change {
+            background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 255, 0), rgb(0, 0, 255)); /* Updated gradient */
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .box:nth-child(2) {
+            background-image: url('stackofbread.jpeg'); /* Image of falling stack of bread */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .lightning {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('stackofbread.jpeg'); /* Image of falling stack of bread */
+            background-size: cover;
+        }
+
+        @keyframes lightning-animation {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .text-box:focus + .heading.change {
+            background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 255, 0), rgb(0, 0, 255)); /* Updated gradient */
+            color: #ffffff; /* Updated font color */
+        }
+
+        .submit-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10%;
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            background-color: #3498db; /* Blue color */
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: none; /* Removed transition */
+        }
+
+        .submit-button.clicked {
+            background-color: #ff0000; /* Red color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Blue boxes container -->
+        <div class="blue-boxes-container">
+            <!-- First blue box with penguin photo and upload box -->
+            <div class="box" style="width: 300px; height: 300px;">
+                <img src="penguin.jpeg" alt="Penguin">
+                <div class="upload-container">
+                    <input type="file" accept="image/*">
+                </div>
+            </div>
+            <!-- Second blue box with falling stack of bread and lightning effect -->
+            <div class="box" style="width: 420px; height: 420px;">
+                <div class="lightning"></div>
+                <div class="heading">ENTER YOUR QUERY</div> <!-- Added heading -->
+                <textarea class="text-box" placeholder="Enter your text here..."></textarea>
+                <button class="submit-button">Submit</button> <!-- Added submit button -->
+            </div>
+        </div>
+        <!-- Big green box -->
+        <div class="big-box"></div>
+    </div>
+    <script>
+        // JavaScript to handle clicking event on submit button
+        const submitButton = document.querySelector('.submit-button');
+
+        submitButton.addEventListener('click', function() {
+            // Toggle class to change button color
+            this.classList.toggle('clicked');
+        });
+    </script>
+</body>
+</html>
