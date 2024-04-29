@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Three Boxes</title>
     <style>
-        /* Centering the main container */
-        body, html {
+        /* Applying radial gradient to the body */
+        body {
             height: 100%;
             margin: 0;
             padding: 0;
@@ -14,10 +14,10 @@
             justify-content: center;
             align-items: center;
             overflow: hidden; /* Hide overflowing content */
-            background-color: #000; /* Set black background */
+            background-image: radial-gradient(circle, pink, white, red); /* Radial gradient background */
         }
 
-        /* Styling for the main container */
+        /* Centering the main container */
         .container {
             display: flex;
             justify-content: center;
@@ -78,7 +78,7 @@
             top: 30%; /* Shifted down */
             left: 10%;
             width: 80%;
-            height: 50%; /* Reduced height */
+            height: 57%; /* Increased height */
             border: none;
             font-size: 16px;
             padding: 10px;
@@ -89,7 +89,7 @@
             display: flex; /* Use flexbox */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
-            background-color: rgba(0, 0, 0, 0.8); /* Dark green background with 80% transparency */
+            background-color: rgba(0, 0, 0, 0.86); /* Dark green background with 80% transparency */
         }
 
         .heading {
@@ -197,7 +197,7 @@
 
 
                 <div class="heading">ENTER YOUR QUERY</div> <!-- Added heading -->
-                <textarea class="text-box" placeholder="Enter your text here..."></textarea>
+                <textarea class="text-box" placeholder="Enter your query here..."></textarea> <!-- Changed placeholder text -->
                 <button class="submit-button">Submit</button> <!-- Added submit button -->
 
             </div>
